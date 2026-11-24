@@ -13,3 +13,19 @@ Run tests with Node.js 22 or newer using `node --test tests/*.test.mjs`.
 ## Publish
 
 Put these files at the root of the `OctopusGarage/s` repository and configure GitHub Pages to publish from the default branch's root. The expected address is `https://octopusgarage.github.io/s/`.
+
+## TypeScript SDK
+
+Install `@octopusgarage/s` from the GitHub Packages npm registry. Configure the
+`@octopusgarage` scope for `https://npm.pkg.github.com` and authenticate with
+package read access.
+
+```ts
+import { encryptLink, decryptLink } from "@octopusgarage/s";
+
+const share = await encryptLink("https://octopusgarage.github.io/panfolio/");
+const destination = await decryptLink(share); // URL
+```
+
+The SDK uses Web Crypto and supports the existing v1 links. Its public key
+conceals the plain destination in the share text and grants no access control.

@@ -1,0 +1,15 @@
+{
+  "name": "@octopusgarage/s",
+  "version": "1.0.0",
+  "description": "Encode and decode OctopusGarage share links",
+  "type": "module",
+  "repository": {"type": "git", "url": "git+https://github.com/OctopusGarage/s.git"},
+  "publishConfig": {"registry": "https://npm.pkg.github.com"},
+  "exports": {".": {"types": "./dist/sdk.d.mts", "import": "./dist/sdk.mjs"}},
+  "files": ["dist"],
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "test": "npm run build && node --test tests/*.test.mjs"
+  },
+  "devDependencies": {"typescript": "5.9.3"}
+}
