@@ -5,11 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="referrer" content="no-referrer">
   <title>Share · OctopusGarage</title>
+  <script>
+    if (location.hash.length > 1) document.documentElement.dataset.mode = 'opening';
+  </script>
   <link rel="stylesheet" href="./style.css">
   <script type="module" src="./app.mjs"></script>
 </head>
 <body>
-  <main>
+  <main id="composer">
     <header>OctopusGarage <span>/s/</span></header>
     <h1 id="title">Share a link</h1>
     <form id="generator">
@@ -24,8 +27,19 @@
     </section>
     <p id="status" role="status"></p>
     <p id="note">The destination is hidden in the link. Anyone with the share link can open it.</p>
-    <a id="reset" href="./" hidden>Create a new link</a>
-    <noscript>Enable JavaScript to create or open a share link.</noscript>
   </main>
+  <main id="handoff" aria-labelledby="handoff-title">
+    <div class="handoff-content">
+      <div class="handoff-mark" aria-hidden="true">s<span>.</span></div>
+      <header>OctopusGarage</header>
+      <div role="status">
+        <h1 id="handoff-title">Opening your link</h1>
+        <p id="handoff-error" hidden>Check that you copied the full share link.</p>
+      </div>
+      <div class="handoff-track" aria-hidden="true"></div>
+      <a id="reset" href="./" hidden>Create a new link</a>
+    </div>
+  </main>
+  <noscript>Enable JavaScript to create or open a share link.</noscript>
 </body>
 </html>

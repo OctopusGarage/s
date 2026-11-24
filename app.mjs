@@ -39,25 +39,29 @@ document.getElementById('copy').addEventListener('click', async () => {
   }
 });
 
+const handoffTitle = document.getElementById('handoff-title');
+const handoffError = document.getElementById('handoff-error');
+const reset = document.getElementById('reset');
+let navigation = 0;
+
 async function openLink() {
+  const request = ++navigation;
   const hash = location.hash;
-  const opening = hash.length > 1;
-  form.hidden = opening;
-  result.hidden = true;
-  document.getElementById('note').hidden = opening;
-  document.getElementById('reset').hidden = !opening;
-  const title = document.getElementById('title');
-  title.textContent = opening ? 'Opening your link' : 'Share a link';
-  status.textContent = '';
-  if (!opening) return;
+  document.documentElement.dataset.mode = hash.length > 1 ? 'opening' : 'compose';
+  handoffTitle.textContent = 'Opening your link';
+  handoffError.hidden = true;
+  reset.hidden = true;
+  if (hash.length <= 1) return;
 
   try {
     const target = await decryptLink(hash.slice(1));
-    if (location.hash === hash) location.replace(target);
+    if (request === navigation && location.hash === hash) location.replace(target);
   } catch {
-    if (location.hash !== hash) return;
-    title.textContent = 'This link could not be opened';
-    status.textContent = 'Check that you copied the full share link.';
+    if (request !== navigation || location.hash !== hash) return;
+    document.documentElement.dataset.mode = 'error';
+    handoffTitle.textContent = 'This link could not be opened';
+    handoffError.hidden = false;
+    reset.hidden = false;
   }
 }
 

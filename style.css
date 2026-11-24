@@ -43,3 +43,77 @@ section { margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid #a2aec3; 
 a { color: #254888; }
 #note { color: #42516b; }
 #status:empty { display: none; }
+
+#handoff { display: none; }
+
+:root:is([data-mode="opening"], [data-mode="error"]) {
+  color-scheme: dark;
+  color: #edf3f5;
+  background: #151d27;
+}
+
+:root:is([data-mode="opening"], [data-mode="error"]) #composer { display: none; }
+
+:root:is([data-mode="opening"], [data-mode="error"]) #handoff {
+  display: grid;
+  place-items: center;
+  box-sizing: border-box;
+  max-width: none;
+  margin: 0;
+  min-height: 100vh;
+  min-height: 100svh;
+  text-align: center;
+  background: radial-gradient(ellipse at 50% 44%, #233540, transparent 64%);
+}
+
+.handoff-content { width: min(100%, 28rem); }
+
+.handoff-mark {
+  display: grid;
+  grid-auto-flow: column;
+  place-content: center;
+  width: 3.75rem;
+  height: 3.75rem;
+  margin: 0 auto 1.4rem;
+  border: 1px solid #ffffff30;
+  border-radius: 1.1rem;
+  background: #ffffff09;
+  font: italic 2.5rem/1 Georgia, serif;
+}
+
+.handoff-mark span, #handoff a { color: #a6e2d1; }
+#handoff header { color: #b4c6ce; font-size: .875rem; }
+#handoff h1 { font-size: clamp(1.9rem, 6vw, 2.8rem); margin: .55rem 0 1.4rem; }
+#handoff-error { color: #b4c6ce; }
+
+.handoff-track {
+  position: relative;
+  overflow: hidden;
+  width: 6rem;
+  height: 2px;
+  margin: 0 auto;
+  border-radius: 999px;
+  background: #ffffff23;
+}
+
+.handoff-track::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent, #a6e2d1, transparent);
+  transform: translateX(-100%);
+  animation: handoff-sweep 1.45s cubic-bezier(.45, 0, .55, 1) infinite;
+}
+
+[data-mode="error"] .handoff-track { display: none; }
+
+@keyframes handoff-sweep {
+  to { transform: translateX(100%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .handoff-track::after {
+    animation: none;
+    transform: none;
+  }
+}
