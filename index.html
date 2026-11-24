@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="referrer" content="no-referrer">
+  <title>Share · OctopusGarage</title>
+  <link rel="stylesheet" href="./style.css">
+  <script type="module" src="./app.mjs"></script>
+</head>
+<body>
+  <main>
+    <header>OctopusGarage <span>/s/</span></header>
+    <h1 id="title">Share a link</h1>
+    <form id="generator">
+      <label for="destination">OctopusGarage Pages URL</label>
+      <input id="destination" type="url" required placeholder="https://octopusgarage.github.io/…" autocomplete="off" spellcheck="false">
+      <button id="generate">Create share link</button>
+    </form>
+    <section id="result" hidden>
+      <label for="shared">Share link</label>
+      <input id="shared" type="url" readonly>
+      <button type="button" id="copy">Copy link</button>
+    </section>
+    <p id="status" role="status"></p>
+    <p id="note">The destination is hidden in the link. Anyone with the share link can open it.</p>
+    <a id="reset" href="./" hidden>Create a new link</a>
+    <noscript>Enable JavaScript to create or open a share link.</noscript>
+  </main>
+</body>
+</html>
